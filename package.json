@@ -18,6 +18,7 @@
     "common",
     "constant",
     "controller",
+	"resourcecontroller",
     "decorator",
     "directive",
     "factory",

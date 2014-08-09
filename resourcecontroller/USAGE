@@ -1,0 +1,8 @@
+Description:
+    Creates a new Angular resource controller
+
+Example:
+    yo angular:resourcecontroller Thing
+
+    This will create:
+        app/scripts/controllers/thing.js
