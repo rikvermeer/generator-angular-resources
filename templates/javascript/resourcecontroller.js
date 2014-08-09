@@ -64,7 +64,8 @@ angular.module('<%= scriptAppName %>')
  */
 angular.module('<%= scriptAppName %>')
     .controller('<%= classedName %>ListCtrl', function ($scope, Restangular) {
-        Restangular.all('<%= name %>').getList()  // GET: /<%= name %>
+        $scope.resource = Restangular.all('<%= name %>');
+	$scope.resource.getList()  // GET: /<%= name %>
             .then(
                 function(resource) {
                     $scope.resource = resource;
