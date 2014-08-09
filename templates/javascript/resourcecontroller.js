@@ -7,16 +7,17 @@
  * Create controller for the <%= classedName %> resource in <%= scriptAppName %>
  */
 angular.module('<%= scriptAppName %>')
-    .controller('<%= classedName %>CreateCtrl', function ($rootScope, $scope, Restangular) {
-        $scope.resource = Restangular.one('<%= classedName %>');
-            $scope.saveResource = function() {
-            $scope.resource.save() // POST /<%= classedName %>
+    .controller('<%= classedName %>CreateCtrl', function ($scope, Restangular) {
+        $scope.resource = Restangular.one('<%= name %>');
+        $scope.saveResource = function() {
+            $scope.resource.save() // POST /<%= name %>
                 .then(
-                    function() {
-                        $rootScope.$broadcast('<%= classedName %>-create-success', $scope.resource );
+                    function(resource) {
+                        $scope.resource = resource;
+                        $scope.$emit('<%= name %>-create-success', $scope.resource );
                     },
                     function() {
-                        $rootScope.$broadcast('<%= classedName %>-create-failed');
+                        $scope.$emit('<%= name %>-create-failed');
                     }
                 );
             };
@@ -30,24 +31,25 @@ angular.module('<%= scriptAppName %>')
  * Edit controller for the <%= classedName %> resource in <%= scriptAppName %>
  */
 angular.module('<%= scriptAppName %>')
-    .controller('<%= classedName %>EditCtrl', function ($rootScope, $scope, Restangular, $routeParams) {
-        Restangular.one('<%= classedName %>', $routeParams.id).get() // GET: /<%= classedName %>/$routeParams.id
+    .controller('<%= classedName %>EditCtrl', function ($scope, Restangular, $routeParams) {
+        $scope.resource = Restangular.one('<%= name %>', $routeParams.id);
+        $scope.resource.get() // GET: /<%= classedName %>/$routeParams.id
             .then(
-                function( <%= classedName %> ) {
-                    $scope.resource = <%= classedName %> ;
-                    $rootScope.$broadcast('<%= classedName %>-get-success', <%= classedName %> );
+                function(resource) {
+                    $scope.resource = resource;
+                    $scope.$emit('<%= name %>-get-success', $scope.resource );
                 }, function() {
-                    $rootScope.$broadcast('<%= classedName %>-get-failed');
+                    $scope.$emit('<%= name %>-get-failed');
                 }
             );
     
-        $scope.saveResource = function( <%= classedName %> ) {
-            <%= classedName %> .save() // PUT /<%= classedName %>/<%= classedName %>.id
+        $scope.saveResource = function() {
+            $scope.resource.save() // PUT /<%= name %>/<%= name %>.id
                 .then(
                     function() {
-                        $rootScope.$broadcast('<%= classedName %>-edit-success', <%= classedName %> );
+                        $scope.$emit('<%= name %>-edit-success', $scope.resource );
                     }, function() {
-                        $rootScope.$broadcast('<%= classedName %>-edit-failed');
+                        $scope.$broadcast('<%= name %>-edit-failed');
                     }
                 );
         };
@@ -61,23 +63,25 @@ angular.module('<%= scriptAppName %>')
  * List controller for the <%= classedName %> resource in <%= scriptAppName %>
  */
 angular.module('<%= scriptAppName %>')
-    .controller('<%= classedName %>ListCtrl', function ($rootScope, $scope, Restangular) {
-        Restangular.all('<%= classedName %>').getList()  // GET: /<%= classedName %>
+    .controller('<%= classedName %>ListCtrl', function ($scope, Restangular) {
+        Restangular.all('<%= name %>').getList()  // GET: /<%= name %>
             .then(
-                function( <%= classedName %> ) {
-                    $scope.resource = <%= classedName %> ;
-                    $rootScope.$broadcast('<%= classedName %>-list-success', <%= classedName %> );
+                function(resource) {
+                    $scope.resource = resource;
+                    $scope.$emit('<%= name %>-list-success', $scope.resource);
                 }, function() {
-                    $rootScope.$broadcast('<%= classedName %>-list-failed');
+                    $scope.$emit('<%= name %>-list-failed');
                 }
             );
     
-        $scope.deleteResource = function( <%= classedName %> ) {
-            <%= classedName %> .remove() // DELETE /<%= classedName %>/<%= classedName %>.id
+        $scope.deleteResource = function(singleResource) {
+            singleResource.remove() // DELETE /<%= classedName %>/<%= classedName %>.id
                 .then(function() {
-                    $rootScope.$broadcast('<%= classedName %>-delete-success', <%= classedName %> );
+                    $scope.$emit('<%= name %>-delete-success', singleResource);
+                    var index = $scope.resource.indexOf(singleResource);
+                    if (index > -1) $scope.resource.splice(index, 1);
                 }, function() {
-                    $rootScope.$broadcast('<%= classedName %>-delete-failed');
+                    $scope.$emit('<%= name %>-delete-failed');
                 }
             );
         };
