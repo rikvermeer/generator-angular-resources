@@ -1,8 +1,8 @@
 # AngularJS generator 
 
-> Yeoman generator for AngularJS - lets you quickly set up a project with sensible defaults and best practices. Extended by me to enhance the defaults by integrating with bootstrap-ui and Restangular.
+> Yeoman generator for AngularJS - lets you quickly set up a project with sensible defaults and best practices. Extended to enhance the defaults by integrating with bootstrap-ui(optional) and Restangular.
 
-[Roadmap for upcoming plans/features/fixes](https://github.com/rikvermeeer/generator-angular-resources/issues/)
+[Roadmap for upcoming plans/features/fixes](https://github.com/rikvermeer/generator-angular-resources/issues)
 
 ## Usage
 
