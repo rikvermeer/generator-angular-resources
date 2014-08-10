@@ -23,8 +23,8 @@ var Generator = module.exports = function Generator() {
     this.foundWhenForRoute = true;
   }
 
-  this.hookFor('angular-resources:controller');
-  this.hookFor('angular-resources:view');
+  this.hookFor('angular-resources:resourcecontroller');
+  this.hookFor('angular-resources:resourceview');
 };
 
 util.inherits(Generator, ScriptBase);
@@ -47,6 +47,7 @@ Generator.prototype.rewriteAppJs = function () {
     this.uri = this.options.uri;
   }
 
+  //Write create route
   var config = {
     file: path.join(
       this.env.options.appPath,
@@ -54,11 +55,41 @@ Generator.prototype.rewriteAppJs = function () {
     ),
     needle: '.otherwise',
     splicable: [
-      "  templateUrl: 'views/" + this.name.toLowerCase() + ".html'" + (coffee ? "" : "," ),
-      "  controller: '" + this.classedName + "Ctrl'"
+      "  templateUrl: 'views/" + this.name.toLowerCase() + "-create.html'" + (coffee ? "" : "," ),
+      "  controller: '" + this.classedName + "CreateCtrl'"
     ]
   };
+  
+  if (coffee) {
+    config.splicable.unshift(".when '/" + this.uri + "/create',");
+  }
+  else {
+    config.splicable.unshift(".when('/" + this.uri + "/create', {");
+    config.splicable.push("})");
+  }
+  angularUtils.rewriteFile(config);
 
+  //Write edit roures
+  config.splicable = [
+	"  templateUrl: 'views/" + this.name.toLowerCase() + "-edit.html'" + (coffee ? "" : "," ),
+    "  controller: '" + this.classedName + "EditCtrl'"
+  ];
+  
+  if (coffee) {
+    config.splicable.unshift(".when '/" + this.uri + "/:id',");
+  }
+  else {
+    config.splicable.unshift(".when('/" + this.uri + "/:id', {");
+    config.splicable.push("})");
+  }
+  angularUtils.rewriteFile(config);
+  
+  //Write list route
+  config.splicable = [
+	"  templateUrl: 'views/" + this.name.toLowerCase() + "-list.html'" + (coffee ? "" : "," ),
+    "  controller: '" + this.classedName + "ListCtrl'"
+  ];
+  
   if (coffee) {
     config.splicable.unshift(".when '/" + this.uri + "',");
   }
@@ -66,6 +97,5 @@ Generator.prototype.rewriteAppJs = function () {
     config.splicable.unshift(".when('/" + this.uri + "', {");
     config.splicable.push("})");
   }
-
   angularUtils.rewriteFile(config);
 };

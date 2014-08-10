@@ -19,7 +19,7 @@ Generator.prototype.createControllerFiles = function createControllerFiles() {
   this.generateSourceAndTest(
     'resourcecontroller',
     'spec/resourcecontroller',
-    'controllers',
+    '/controllers',
     this.options['skip-add'] || false
   );
 };

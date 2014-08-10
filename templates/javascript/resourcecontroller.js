@@ -80,7 +80,9 @@ angular.module('<%= scriptAppName %>')
                 .then(function() {
                     $scope.$emit('<%= name %>-delete-success', singleResource);
                     var index = $scope.resource.indexOf(singleResource);
-                    if (index > -1) $scope.resource.splice(index, 1);
+                    if (index > -1) {
+						$scope.resource.splice(index, 1);
+					}
                 }, function() {
                     $scope.$emit('<%= name %>-delete-failed');
                 }

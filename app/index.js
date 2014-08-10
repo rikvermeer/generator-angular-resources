@@ -57,15 +57,19 @@ var Generator = module.exports = function Generator(args, options) {
     this.env.options.coffee = this.options.coffee;
   }
 
-  this.hookFor('angular:common', {
+  this.hookFor('angular-resources:common', {
     args: args
   });
 
-  this.hookFor('angular:main', {
+  this.hookFor('angular-resources:main', {
     args: args
   });
 
-  this.hookFor('angular:controller', {
+  this.hookFor('angular-resources:resourcecontroller', {
+    args: args
+  });
+  
+  this.hookFor('angular-resources:controller', {
     args: args
   });
 
@@ -126,7 +130,7 @@ var Generator = module.exports = function Generator(args, options) {
     });
 
     if (this.env.options.ngRoute) {
-      this.invoke('angular:route', {
+      this.invoke('angular-resources:route', {
         args: ['about']
       });
     }

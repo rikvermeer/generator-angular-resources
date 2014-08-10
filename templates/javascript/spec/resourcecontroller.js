@@ -1,5 +1,14 @@
 'use strict';
 
+function sanitizeRestangularOne(item) {
+	return _.omit(item, "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch",
+		"$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch",
+		"$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST",
+		"customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST",
+		"doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl", "singleOne", "getRequestedUrl", "clone", "reqParams", 
+		"withHttpConfig", "plain", "several", "oneUrl", "allUrl", "fromServer", "save", "_$httpConfig");
+}
+	
 function sanitizeRestangularList(items) {
     for(var i = 0; i < items.length; i++) {
         items[i] = sanitizeRestangularOne(items[i]);
@@ -7,14 +16,7 @@ function sanitizeRestangularList(items) {
     return items;
 }
 
-function sanitizeRestangularOne(item) {
-        return _.omit(item, "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch",
-            "$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch",
-            "$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST",
-            "customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST",
-            "doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl", "singleOne", "getRequestedUrl", "clone", "reqParams", 
-            "withHttpConfig", "plain", "several", "oneUrl", "allUrl", "fromServer", "save", "_$httpConfig");
-    }
+
 
 describe('Resource controllers: <%= name %>', function () {
 
