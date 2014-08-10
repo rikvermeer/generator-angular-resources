@@ -60,6 +60,24 @@ yo angular
 ### Route
 Generates a controller and view, and configures a route in `app/scripts/app.js` connecting them.
 
+Produces `app/scripts/app.js`:
+```javascript
+.when('/user/create', {
+        templateUrl: 'views/user-create.html',
+        controller: 'UserCreateCtrl'
+      })
+.when('/user/:id', {
+        templateUrl: 'views/user-edit.html',
+        controller: 'UserEditCtrl'
+      })
+.when('/user', {
+        templateUrl: 'views/user-list.html',
+        controller: 'UserListCtrl'
+      })
+  // ...
+});
+```
+
 Example:
 ```bash
 yo angular-resources:resourceroute user
