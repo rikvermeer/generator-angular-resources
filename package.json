@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-resources",
-  "version": "0.9.5-0.1.2",
+  "version": "0.9.5-0.1.3",
   "description": "Yeoman generator for AngularJS, forked by Rik Vermeer to generate CRUD over REST by using Restangular",
   "keywords": [
     "yeoman-generator",
