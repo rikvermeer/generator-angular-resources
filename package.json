@@ -14,7 +14,7 @@
     "restangular"
   ],
   "author": {
-    "name": "The Yeoman Team and Rik Vermeer"
+    "name": "Rik Vermeer"
   },
   "main": "app/index.js",
   "files": [
